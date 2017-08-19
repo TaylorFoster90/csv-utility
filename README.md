@@ -19,6 +19,6 @@ print_r($contacts->getData());
 
 | Method | Params | Returns |
 | --- | --- | --- |
-| `total()` |  | `int` total number of rows in the CSV. (Does Not Include Headers) |
-| `getHeaders()` |  | `array` the headers from the CSV. |
-| `getData()` |  | `array` the data from the CSV. |
+| `total()` |  | `int` - Total number of rows in the CSV. (Does Not Include Headers) |
+| `getHeaders()` |  | `array` -  The headers from the CSV. |
+| `getData()` |  | `array` - The data from the CSV. |

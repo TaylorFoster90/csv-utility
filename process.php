@@ -7,6 +7,9 @@
 
     $handler = new CSVUtility( $post_file );
 
+    echo '<pre>';
+    print_r($handler->getData());
+    echo '</pre>';
     die();
 
   endif;

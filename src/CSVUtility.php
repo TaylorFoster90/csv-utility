@@ -20,7 +20,9 @@
         if( $counter === 0 ) {
           $this->headers = $row;
         }else{
-          $this->data[] = $row;
+          foreach( $row as $key=>$value ) {
+            $this->data[( $counter - 1 )][$this->headers[$key]] = $value;
+          }
         }
         $counter++;
         $this->totalRows = ( $counter - 1 );
