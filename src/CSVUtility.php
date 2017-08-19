@@ -27,7 +27,7 @@
       }
     }
 
-    public function totalRows()
+    public function total()
     {
       return $this->totalRows;
     }
@@ -36,6 +36,11 @@
     public function getData()
     {
       return $this->data;
+    }
+
+    public function getHeader()
+    {
+      return $this->headers;
     }
 
   }
