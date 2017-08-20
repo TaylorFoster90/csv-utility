@@ -17,6 +17,9 @@
     // The database table this CSV refers to (only used if class is connected to a database)
     public $table = null;
 
+    // MySQL connection
+    private $connection = null;
+
     public function __construct( $file )
     {
       $fh = fopen($file, 'r');
@@ -106,6 +109,22 @@
         }
       });
       $this->data = array_values($filteredData);
+      return $this;
+    }
+
+
+    public function openConnection( string $host, string $username, string $password, string $database )
+    {
+      $this->connection = mysqli_connect( $host, $username, $password, $database );
+      if( !$this->connection ){
+        echo 'No connection found.';
+      }
+      return $this;
+    }
+
+    public function setTable( string $tableName )
+    {
+      $this->table = $tableName;
       return $this;
     }
 

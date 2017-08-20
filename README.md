@@ -162,3 +162,25 @@ print_r($instance->getHeaders());
 ```
 
 ***
+
+## Connecting To Your Database
+
+Currently, CSVUtility only supports `MySQL` connections. Please ensure your web sever supports `MySQL`.
+
+### Opening A Connection
+
+In order to connect CSVUtility to your database you need to follow these steps.
+
+1) Use the `openConnection` method to open your connection to your database.
+
+2) Set the name of the table that the CSV data should point to.
+
+3) Set the names of the columns and types for the table.
+
+** Example: **
+```
+$instance = new CSVUtility( './assets/contacts.csv' );
+
+$instance->openConnection( $host, $username, $password, $database )->setTable( 'contacts' );
+
+```
