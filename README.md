@@ -15,10 +15,21 @@ print_r($contacts->getData());
 ```
 
 
-## Methods
+## Available Methods
 
-| Method | Params | Returns |
-| --- | --- | --- |
-| `total()` |  | `int` - Total number of rows in the CSV. (Does Not Include Headers) |
-| `getHeaders()` |  | `array` -  The headers from the CSV. |
-| `getData()` |  | `array` - The data from the CSV. |
+### `total()`
+--------------
+
+Returns the total number of rows in the provided CSV. NOTE: This count will not include the first row of the CSV (the headers).
+
+**Parameters:**
+
+**Returns:**
+`int` - The total number of rows.
+
+**Example:**
+```
+$instance = new CSVUtility( './assets/contacts.csv' );
+
+echo $instance->total();
+```
