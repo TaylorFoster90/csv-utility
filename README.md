@@ -1,11 +1,11 @@
 # CSV Utility
 
-A class that parses CSV files and gives you to options to:
+A class that parses CSV files and gives you the options to:
 
 - View the data as associative arrays.
 - Manipulate / modify the data and use it to: display it on the front end, insert it into your database, create a new CSV, and more!
 
-## Example Usage(s)
+## Example Usage
 
 ```
 $contacts = new CSVUtility( '/assets/files/new-hires.csv' );
