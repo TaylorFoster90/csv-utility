@@ -27,7 +27,7 @@ None
 
 **Returns:**
 
-`int` - The total number of rows.
+`int` - Returns the total number of rows of data.
 
 **Example:**
 
@@ -35,6 +35,31 @@ None
 $instance = new CSVUtility( './assets/contacts.csv' );
 
 echo $instance->total();
+```
+
+***
+
+### `getHeaders()`
+
+Returns the headers (the keys in the data) of the provided CSV.
+
+**Parameters:**
+
+None
+
+**Returns:**
+
+`array` - Returns the headers of the provided CSV
+
+**Example:**
+
+```
+$instance = new CSVUtility( './assets/contacts.csv' );
+
+print_r($instance->getHeaders());
+
+// [ 0 => 'name', 1 => 'age', 2 => 'job']
+
 ```
 
 ***
@@ -49,7 +74,7 @@ None
 
 **Returns:**
 
-`array` - Associative arrays of data from CSV file.
+`array` - Returns associative arrays of data from CSV file.
 
 **Example:**
 
@@ -58,7 +83,40 @@ $instance = new CSVUtility( './assets/contacts.csv' );
 
 print_r($instance->getData());
 
-// [ 'name' => 'Bob', 'age' => 22, 'job' => 'developer' ], 1 => [ 'name' => 'Susan', 'age' => 45, 'job' => 'teacher' ] ]
+// [ 0 => ['name' => 'Bob', 'age' => 22, 'job' => 'developer' ], 1 => [ 'name' => 'Susan', 'age' => 45, 'job' => 'teacher' ] ]
+
+```
+
+***
+
+### `removeIfExists( string $key, string $value )`
+
+Removes data from the instance based on key value matches.
+
+**Parameters:**
+
+`$key` - `string` - The key of the value being searched for.
+
+`$value` - `string` - The value to search for.
+
+**Returns:**
+
+`$this` - Returns instance.
+
+**Example:**
+
+```
+$instance = new CSVUtility( './assets/contacts.csv' );
+
+print_r($instance->getData());
+
+// [ 0 => ['name' => 'Bob', 'age' => 22, 'job' => 'developer' ], 1 => [ 'name' => 'Susan', 'age' => 45, 'job' => 'teacher' ] ]
+
+$instance->removeIfExists('name', 'Bob');
+
+print_r($instance->getData());
+
+// [ 0 => [ 'name' => 'Susan', 'age' => 45, 'job' => 'teacher' ] ]
 
 ```
 
