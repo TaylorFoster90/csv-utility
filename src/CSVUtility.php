@@ -6,8 +6,6 @@
 
     private $headers = [];
 
-    private $totalRows = 0;
-
     private $expectedHeaders = null;
 
     private $canExecute = true;
@@ -25,13 +23,12 @@
           }
         }
         $counter++;
-        $this->totalRows = ( $counter - 1 );
       }
     }
 
     public function total()
     {
-      return $this->totalRows;
+      return count($this->data);
     }
 
 
@@ -43,6 +40,35 @@
     public function getHeader()
     {
       return $this->headers;
+    }
+
+    public function renameKeys( array $oldToNew )
+    {
+      foreach( $this->data as &$data ) {
+        foreach( $oldToNew as $old=>$new ) {
+          $data[$new] = $data[$old];
+          unset($data[$old]);
+        }
+      }
+      return $this;
+    }
+
+    /**
+     * Removes data based on $key $value pair
+     * @param  string $key   the name of the header
+     * @param  string $value the value
+     * @return $this
+     */
+    public function removeIfExists( $key, $value )
+    {
+      $filteredData = array_filter($this->data, function($arr) use($key,$value) {
+        if( $arr[$key] == $value ){
+        }else{
+          return $arr;
+        }
+      });
+      $this->data = array_values($filteredData);
+      return $this;
     }
 
   }
