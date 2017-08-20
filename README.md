@@ -1,17 +1,18 @@
 # CSV Utility
 
+A class that parses CSV files and gives you to options to:
+
+- View the data as associative arrays.
+- Manipulate / modify the data and use it to: display it on the front end, insert it into your database, create a new CSV, and more!
+
 ## Example Usage(s)
 
 ```
-
 $contacts = new CSVUtility( '/assets/files/new-hires.csv' );
 
 echo $contacts->total();
 
-print_r($contacts->getHeaders());
-
 print_r($contacts->getData());
-
 ```
 
 
@@ -117,6 +118,46 @@ $instance->removeIfExists('name', 'Bob');
 print_r($instance->getData());
 
 // [ 0 => [ 'name' => 'Susan', 'age' => 45, 'job' => 'teacher' ] ]
+
+```
+
+***
+
+### `renameKeys( array $oldToNew, bool $changeHeaders )`
+
+Rename the keys in the data without compromising original index structure.
+
+**Parameters:**
+
+`$oldToNew` - `array` - An associative array, the key must be the current key in the data and the value is what you'd like to rename the key to.
+
+`$changeHeaders` - `bool` - If true, also changes the array that stores the original headers of the uploaded CSV file. Default is `true`.
+
+**Returns:**
+
+`$this` - Returns instance.
+
+**Example:**
+
+```
+$instance = new CSVUtility( './assets/contacts.csv' );
+
+$oldToNew = [
+  'job' => 'occupation',
+  'name' => 'first_name',
+];
+
+print_r($instance->getData());
+
+// [ 0 => ['name' => 'Bob', 'age' => 22, 'job' => 'developer' ], 1 => [ 'name' => 'Susan', 'age' => 45, 'job' => 'teacher' ] ]
+
+$instance->renameKeys( $oldToNew );
+
+print_r($instance->getData());
+print_r($instance->getHeaders());
+
+// [ 0 => ['first_name' => 'Bob', 'age' => 22, 'occupation' => 'developer' ], 1 => [ 'first_name' => 'Susan', 'age' => 45, 'occupation' => 'teacher' ] ]
+// [ 0 => 'first_name', 1 => 'age', 2 => 'occupation' ]
 
 ```
 
