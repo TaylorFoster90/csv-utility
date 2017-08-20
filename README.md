@@ -36,3 +36,30 @@ $instance = new CSVUtility( './assets/contacts.csv' );
 
 echo $instance->total();
 ```
+
+***
+
+### `getData()`
+
+Returns the data (rows) in the provided CSV as associative arrays.
+
+**Parameters:**
+
+None
+
+**Returns:**
+
+`array` - Associative arrays of data from CSV file.
+
+**Example:**
+
+```
+$instance = new CSVUtility( './assets/contacts.csv' );
+
+print_r($instance->getData());
+
+// [ 'name' => 'Bob', 'age' => 22, 'job' => 'developer' ], 1 => [ 'name' => 'Susan', 'age' => 45, 'job' => 'teacher' ] ]
+
+```
+
+***
