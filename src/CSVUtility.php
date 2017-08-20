@@ -14,6 +14,9 @@
     // Can perform actions
     private $canExecute = true;
 
+    // The database table this CSV refers to (only used if class is connected to a database)
+    public $table = null;
+
     public function __construct( $file )
     {
       $fh = fopen($file, 'r');
@@ -58,17 +61,32 @@
     }
 
     /**
-     * Renames the headers and the keys
-     * @param  array  $oldToNew
-     * @return $this
+     * Rename the keys in the data set and maintain index structure
+     * @param  array   $oldToNew      an associative array with the key being the current(old) data key name and the value being the new data key name
+     * @param  boolean $changeHeaders change the original header array
+     * @return  $this
+     *
+     * @example
+        $instance->getData();
+        // [ 0 => [ 'name' => 'Bob', 'how_old' => 22, 'job' => 'developer' ], 1 => [ 'name' => 'Susan', 'how_old' => 45, 'job' => 'teacher' ] ]
+        $instance->renameKeys( ['how_old' => 'age'] );
+        $instance->getData();
+        // [ 0 => [ 'name' => 'Bob', 'age' => 22, 'job' => 'developer' ], 1 => [ 'name' => 'Bob', 'age' => 22, 'job' => 'developer' ] ]
      */
-    public function renameKeys( array $oldToNew )
-    {
-      foreach( $this->data as &$data ) {
-        foreach( $oldToNew as $old=>$new ) {
-          $data[$new] = $data[$old];
-          unset($data[$old]);
+    public function renameKeys( array $oldToNew, bool $changeHeaders = true ) {
+      foreach( $this->data as &$array ) {
+        foreach( $oldToNew as $oldKey=>$newKey ) {
+          $keys = array_keys($array);
+          if (false === $index = array_search($oldKey, $keys)) {
+          }
+          $keys[$index] = $newKey;
+          $array = array_combine($keys, array_values($array));
         }
+      }
+      if( $changeHeaders ) {
+        $this->headers = array_map(function($val) use($oldToNew){
+          return array_key_exists( $val, $oldToNew ) ? $oldToNew[$val] : $val;
+        }, $this->headers);
       }
       return $this;
     }

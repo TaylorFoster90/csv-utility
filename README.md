@@ -1,6 +1,6 @@
 # CSV Utility
 
-## Example Usage
+## Example Usage(s)
 
 ```
 
@@ -12,8 +12,8 @@ print_r($contacts->getHeaders());
 
 print_r($contacts->getData());
 
-
 ```
+
 
 ## Methods
 
