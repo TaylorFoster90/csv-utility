@@ -175,12 +175,14 @@ In order to connect CSVUtility to your database you need to follow these steps.
 
 2) Set the name of the table that the CSV data should point to.
 
-3) Set the names of the columns and types for the table.
+3) Set the names of the columns and data types for the table.
 
 ** Example: **
 ```
 $instance = new CSVUtility( './assets/contacts.csv' );
 
-$instance->openConnection( $host, $username, $password, $database )->setTable( 'contacts' );
+$instance->openConnection( $host, $username, $password, $database )
+  ->setTable( 'contacts' )
+  ->setColumns( [ 'name' => 's', 'age' => 'i', 'job' => 's' ] );
 
 ```

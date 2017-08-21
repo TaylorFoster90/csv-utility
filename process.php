@@ -9,6 +9,14 @@
 
     $handler->openConnection( '127.0.0.1', 'root', '', 'sandbox' );
 
+    $columns = [
+      'name' => 's',
+      'age' => 'i',
+      'job' => 's',
+    ];
+
+    $handler->setTable('contacts')->setColumns( $columns )->setupPrepStatement();
+
     // $oldToNew = [
     //   'NDC' => 'n_d_c',
     //   'Date' => 'el_dato',

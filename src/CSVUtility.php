@@ -20,6 +20,9 @@
     // MySQL connection
     private $connection = null;
 
+    private $columns = null;
+
+
     public function __construct( $file )
     {
       $fh = fopen($file, 'r');
@@ -127,5 +130,20 @@
       $this->table = $tableName;
       return $this;
     }
+
+    public function setColumns( array $columns )
+    {
+      $this->columns = $columns;
+      return $this;
+    }
+
+
+    public function setupPrepStatement('data')
+    {
+      $cols = implode(', ', array_keys($this->columns));
+      $dataTypes = implode('', $this->columns);
+      $need = $data;
+    }
+
 
   }
